@@ -127,10 +127,20 @@
         }
         function fit() {
             const cw = canvas.clientWidth, ch = canvas.clientHeight;
-            const f = Math.min(cw / b.vbW, ch / b.vbH);
-            state.s = f; state.min = Math.max(0.1, f * 0.6); state.max = f * 5 + 3;
-            state.x = (cw - b.vbW * f) / 2;
-            state.y = (ch - b.vbH * f) / 2;
+            // Consistent node size across ALL boards: aim each node ~ a target px height,
+            // scaled a little to the container. Never fit-to-whole-graph (that shrinks big
+            // workflows into a thin line). Anchor to the start; user pans/zooms to explore.
+            const targetNode = Math.max(46, Math.min(66, cw * 0.17));
+            let s = targetNode / NODE_H;
+            const fitAll = Math.min(cw / b.vbW, ch / b.vbH);
+            s = Math.max(s, fitAll);            // if the whole graph is tiny, don't zoom out past fit
+            s = Math.min(s, 1.15);
+            state.s = s;
+            state.min = Math.max(0.12, fitAll * 0.8);
+            state.max = s * 6;
+            // start of the workflow near the left, graph vertically centered
+            state.x = 20 - PAD * s;
+            state.y = ch / 2 - (b.vbH / 2) * s;
             apply(false);
         }
         function zoomAt(px, py, factor) {

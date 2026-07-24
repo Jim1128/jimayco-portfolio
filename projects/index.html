@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../assets/tw.js?v=7"></script>
-    <link rel="stylesheet" href="../assets/styles.css?v=7">
+    <script src="../assets/tw.js?v=8"></script>
+    <link rel="stylesheet" href="../assets/styles.css?v=8">
 </head>
 
 <body data-page="projects" data-prefix="../">
@@ -118,14 +118,15 @@
         #pm-title { color: var(--navy-strong); }
         #pm-counts { font-weight: 700; }
         .pm-board { height: 58vh; min-height: 320px; border-radius: 14px; border: 1px solid var(--border); background: #17171d; overflow: hidden; }
+        @media (max-width: 640px) { .pm-board { height: 44vh; min-height: 280px; } }
         .pm-gallery img, #pm-gallery img { height: 220px; border-radius: 12px; border: 1px solid var(--border); flex: none; object-fit: contain; background: var(--bg-soft); }
         .gbtn { padding: .4rem .8rem; border-radius: 9px; border: 1px solid var(--border); background: var(--card); color: var(--muted); font-size: .8rem; font-weight: 600; cursor: pointer; }
         .gbtn.active { background: var(--blue-soft); color: var(--blue-dark); border-color: #bfdbfe; }
     </style>
 
-    <script src="../assets/projects-data.js?v=7"></script>
-    <script src="../assets/workflows-data.js?v=7"></script>
-    <script src="../assets/n8n-viz.js?v=7"></script>
+    <script src="../assets/projects-data.js?v=8"></script>
+    <script src="../assets/workflows-data.js?v=8"></script>
+    <script src="../assets/n8n-viz.js?v=8"></script>
     <script>
         const px = s => '../' + s;
         const WF = window.N8N_WORKFLOWS || [];
@@ -250,7 +251,7 @@
 
         render();
     </script>
-    <script src="../assets/site.js?v=7"></script>
+    <script src="../assets/site.js?v=8"></script>
 </body>
 
 </html>
