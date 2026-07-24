@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../assets/tw.js?v=12"></script>
-    <link rel="stylesheet" href="../assets/styles.css?v=12">
+    <script src="../assets/tw.js?v=13"></script>
+    <link rel="stylesheet" href="../assets/styles.css?v=13">
 </head>
 
 <body data-page="projects" data-prefix="../">
@@ -124,9 +124,9 @@
         .gbtn.active { background: var(--blue-soft); color: var(--blue-dark); border-color: #bfdbfe; }
     </style>
 
-    <script src="../assets/projects-data.js?v=12"></script>
-    <script src="../assets/workflows-data.js?v=12"></script>
-    <script src="../assets/n8n-viz.js?v=12"></script>
+    <script src="../assets/projects-data.js?v=13"></script>
+    <script src="../assets/workflows-data.js?v=13"></script>
+    <script src="../assets/n8n-viz.js?v=13"></script>
     <script>
         const px = s => '../' + s;
         const WF = window.N8N_WORKFLOWS || [];
@@ -220,7 +220,7 @@
                 logo.style.background = '#ede9fe'; logo.style.color = '#7c3aed'; logo.innerHTML = '🧩';
                 $('pm-problem').textContent = it.ext.desc;
                 $('pm-built-label').textContent = 'What it does';
-                $('pm-built').innerHTML = `<li>Chrome extension (Manifest V3) supporting the outbound automation and lead workflow.</li><li>Runs in-browser to capture and pass data into the n8n pipelines.</li>`;
+                $('pm-built').innerHTML = (it.ext.built || []).map(b => `<li>${b}</li>`).join('');
                 $('pm-stack-label').textContent = 'Permissions';
                 const perms = (it.ext.permissions || []);
                 $('pm-stack').innerHTML = (perms.length ? perms : ['activeTab', 'storage']).map(s => `<span class="tag">${s}</span>`).join('');
@@ -259,7 +259,7 @@
 
         render();
     </script>
-    <script src="../assets/site.js?v=12"></script>
+    <script src="../assets/site.js?v=13"></script>
 </body>
 
 </html>
