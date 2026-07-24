@@ -1,0 +1,14 @@
+# Confidential — real exported workflows, extension source, company screenshots.
+# The site renders from assets/workflows-data.js (node layout only); raw files are NOT needed publicly.
+n8n workflow/
+automation/
+
+# Resume source (only the PDF is published for Download CV)
+About Jim/*.docx
+About Jim/~$*
+
+# OS / editor junk
+Thumbs.db
+.DS_Store
+desktop.ini
+*~

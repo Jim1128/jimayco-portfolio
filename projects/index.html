@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Jim Christian Ayco</title>
+    <meta name="description"
+        content="Projects by Jim Christian Ayco — real n8n automation workflows, Chrome extensions, web and mobile apps.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/tw.js"></script>
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
+
+<body data-page="projects" data-prefix="../">
+    <main>
+        <!-- HERO -->
+        <section class="section wrap" style="padding-top:3.25rem">
+            <div class="max-w-3xl reveal in">
+                <span class="eyebrow">Featured Work</span>
+                <h1 class="h-title mt-3">Projects</h1>
+                <p class="lead mt-5">Real n8n automation workflows and Chrome extensions I build at Enki.AI, plus web and
+                    mobile applications from freelance and academic work. Open any automation to see its live workflow
+                    board.</p>
+            </div>
+        </section>
+
+        <!-- FILTERS -->
+        <section class="wrap">
+            <div class="flex flex-wrap gap-2.5" id="filters">
+                <button class="filter-btn active" data-f="all">All</button>
+                <button class="filter-btn" data-f="automation">n8n Automation</button>
+                <button class="filter-btn" data-f="extension">Chrome Extensions</button>
+                <button class="filter-btn" data-f="web">Web Apps</button>
+                <button class="filter-btn" data-f="mobile">Mobile Apps</button>
+            </div>
+        </section>
+
+        <!-- GRID -->
+        <section class="section wrap" style="padding-top:1.5rem">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="grid"></div>
+        </section>
+    </main>
+
+    <!-- MODAL -->
+    <div id="modal" class="pm-overlay" aria-hidden="true">
+        <div class="pm-panel card" role="dialog" aria-modal="true" aria-labelledby="pm-title">
+            <div class="pm-head">
+                <div class="flex items-center gap-3 min-w-0">
+                    <div id="pm-logo" class="pm-logo"></div>
+                    <div class="min-w-0">
+                        <span id="pm-cat" class="eyebrow" style="font-size:.65rem">CASE STUDY</span>
+                        <h2 id="pm-title" style="font-weight:800;color:var(--navy-strong);font-size:1.25rem;margin:0">
+                        </h2>
+                    </div>
+                </div>
+                <button id="pm-close" aria-label="Close" class="pm-x">✕</button>
+            </div>
+            <div class="pm-body">
+                <!-- n8n board -->
+                <div id="pm-board-wrap" class="hidden">
+                    <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+                        <span class="pm-label" style="margin:0">Live workflow board</span>
+                        <span id="pm-counts" class="tag tag-blue"></span>
+                    </div>
+                    <div id="pm-board" class="pm-board"></div>
+                    <p style="color:var(--muted-soft);font-size:.78rem;margin-top:.5rem">Rendered directly from the
+                        exported n8n workflow — nodes and connections are real. Animated dots show data flow direction.
+                    </p>
+                </div>
+                <!-- gallery -->
+                <div id="pm-gallery-wrap" class="hidden" style="margin-bottom:1.5rem">
+                    <div class="flex gap-2 mb-3">
+                        <button class="gbtn active" data-g="mobile">📱 Mobile UI</button>
+                        <button class="gbtn" data-g="web">🖥 Web UI</button>
+                    </div>
+                    <div id="pm-gallery" class="flex gap-3 overflow-x-auto pb-2"></div>
+                </div>
+
+                <div class="mt-5">
+                    <p class="pm-label">Overview</p>
+                    <p id="pm-problem" class="pm-text"></p>
+                </div>
+                <div id="pm-built-wrap" class="mt-5">
+                    <p class="pm-label">What it does</p>
+                    <ul id="pm-built" class="pm-text space-y-1.5" style="list-style:disc;padding-left:1.2rem"></ul>
+                </div>
+                <div class="mt-5">
+                    <p class="pm-label" id="pm-stack-label">Tech stack</p>
+                    <div id="pm-stack" class="flex flex-wrap gap-2 mt-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .filter-btn { padding: .55rem 1.15rem; border-radius: 999px; border: 1px solid var(--blue); background: var(--blue-soft); color: var(--blue-dark); font-weight: 700; font-size: .88rem; cursor: pointer; transition: transform .18s ease, background .2s ease, color .2s ease, box-shadow .2s ease; }
+        .filter-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); background: var(--blue); color: #fff; }
+        .filter-btn.active { background: var(--blue); color: #fff; border-color: var(--blue); box-shadow: 0 6px 16px -8px var(--blue); }
+
+        .mini-board { height: 150px; border-radius: 12px; border: 1px solid var(--border); background: #17171d; overflow: hidden; margin-bottom: 1rem; }
+
+        .pm-overlay { position: fixed; inset: 0; z-index: 70; background: rgba(15,23,42,.5); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; padding: 1rem; }
+        .pm-overlay.show { display: flex; }
+        .pm-panel { width: 100%; max-width: 860px; max-height: 90vh; display: flex; flex-direction: column; background: var(--card); overflow: hidden; }
+        .pm-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.4rem; border-bottom: 1px solid var(--border); }
+        .pm-logo { width: 44px; height: 44px; flex: none; border-radius: 11px; background: var(--blue-soft); display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 6px; font-weight: 800; }
+        .pm-x { width: 34px; height: 34px; flex: none; border-radius: 10px; border: 1px solid var(--border); background: var(--card); cursor: pointer; color: var(--muted); }
+        .pm-x:hover { color: var(--navy); border-color: var(--blue); }
+        .pm-body { padding: 1.4rem; overflow-y: auto; }
+        .pm-label { color: var(--blue-dark); font-size: .74rem; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 .5rem; }
+        .pm-text { color: var(--navy); font-size: .95rem; line-height: 1.75; }
+        .pm-body ul.pm-text li { margin-bottom: .35rem; }
+        #pm-title { color: var(--navy-strong); }
+        #pm-counts { font-weight: 700; }
+        .pm-board { height: 58vh; min-height: 320px; border-radius: 14px; border: 1px solid var(--border); background: #17171d; overflow: hidden; }
+        .pm-gallery img, #pm-gallery img { height: 220px; border-radius: 12px; border: 1px solid var(--border); flex: none; object-fit: contain; background: var(--bg-soft); }
+        .gbtn { padding: .4rem .8rem; border-radius: 9px; border: 1px solid var(--border); background: var(--card); color: var(--muted); font-size: .8rem; font-weight: 600; cursor: pointer; }
+        .gbtn.active { background: var(--blue-soft); color: var(--blue-dark); border-color: #bfdbfe; }
+    </style>
+
+    <script src="../assets/projects-data.js"></script>
+    <script src="../assets/workflows-data.js"></script>
+    <script src="../assets/n8n-viz.js"></script>
+    <script>
+        const px = s => '../' + s;
+        const WF = window.N8N_WORKFLOWS || [];
+        const EXT = window.N8N_EXTENSIONS || [];
+        const SOFT = (window.PORTFOLIO_PROJECTS || []).filter(p => p.category === 'web' || p.category === 'mobile');
+
+        // Build unified item list
+        const ITEMS = [];
+        WF.forEach(w => ITEMS.push({
+            kind: 'wf', id: w.id, category: 'automation', title: w.title, short: w.desc,
+            tags: ['n8n', w.nodeCount + ' nodes', (w.edges || []).length + ' connections'], wf: w
+        }));
+        EXT.forEach(e => ITEMS.push({
+            kind: 'ext', id: e.id, category: 'extension', title: e.title, short: e.desc,
+            tags: ['Chrome Extension', e.version ? 'v' + e.version : 'MV3'], ext: e
+        }));
+        SOFT.forEach(p => ITEMS.push({
+            kind: 'soft', id: p.id, category: p.category, title: p.title, short: p.short,
+            tags: p.tags, soft: p
+        }));
+
+        const grid = document.getElementById('grid');
+        let current = 'all';
+
+        function catLabel(c) { return c === 'automation' ? 'N8N WORKFLOW' : c === 'extension' ? 'CHROME EXTENSION' : c === 'mobile' ? 'MOBILE APP' : 'WEB APPLICATION'; }
+        function accent(c) { return c === 'automation' ? '#22c55e' : c === 'extension' ? '#8b5cf6' : 'var(--blue)'; }
+
+        function cardMedia(it) {
+            if (it.kind === 'wf') return `<div class="mini-board" data-mini="${it.id}"></div>`;
+            if (it.kind === 'ext') return `<div style="height:150px;border-radius:12px;background:linear-gradient(135deg,#ede9fe,#f5f3ff);display:flex;align-items:center;justify-content:center;font-size:2.4rem;margin-bottom:1rem">🧩</div>`;
+            const p = it.soft;
+            return `<div style="height:150px;border-radius:12px;background:var(--blue-soft);display:flex;align-items:center;justify-content:center;padding:1.5rem;margin-bottom:1rem;overflow:hidden"><img src="${px(p.logo)}" alt="${p.title} logo" loading="lazy" style="max-height:100%;max-width:100%;object-fit:contain"></div>`;
+        }
+
+        function render() {
+            const list = current === 'all' ? ITEMS : ITEMS.filter(i => i.category === current);
+            grid.innerHTML = list.map(it => `
+              <button class="card card-hover p-5 reveal in" style="text-align:left;cursor:pointer;display:flex;flex-direction:column" onclick="openItem('${it.id}')">
+                ${cardMedia(it)}
+                <span style="color:${accent(it.category)};font-size:.68rem;font-weight:800;letter-spacing:.08em">${catLabel(it.category)}</span>
+                <h3 style="font-weight:800;color:var(--navy-strong);margin:.35rem 0 .4rem;font-size:1rem">${it.title}</h3>
+                <p style="color:var(--muted);font-size:.85rem;line-height:1.6;flex:1">${it.short}</p>
+                <div class="flex flex-wrap gap-1.5 mt-4">${it.tags.slice(0, 3).map(t => `<span class="tag" style="font-size:.7rem">${t}</span>`).join('')}</div>
+                <span style="color:${accent(it.category)};font-weight:700;font-size:.82rem;margin-top:1rem;display:inline-flex;gap:.35rem">${it.kind === 'wf' ? 'Open workflow board' : 'View details'} →</span>
+              </button>`).join('');
+            // draw mini boards
+            list.filter(i => i.kind === 'wf').forEach(i => {
+                const el = grid.querySelector(`[data-mini="${i.id}"]`);
+                if (el) renderN8nBoard(el, i.wf, { mini: true });
+            });
+        }
+
+        document.getElementById('filters').addEventListener('click', e => {
+            const b = e.target.closest('.filter-btn'); if (!b) return;
+            document.querySelectorAll('.filter-btn').forEach(x => x.classList.remove('active'));
+            b.classList.add('active'); current = b.dataset.f; render();
+        });
+
+        // Modal
+        const modal = document.getElementById('modal');
+        const $ = id => document.getElementById(id);
+        function show(el, on) { el.classList.toggle('hidden', !on); }
+
+        function openItem(id) {
+            const it = ITEMS.find(x => x.id === id); if (!it) return;
+            $('pm-title').textContent = it.title;
+            $('pm-cat').textContent = catLabel(it.category);
+            const logo = $('pm-logo');
+
+            // reset sections
+            show($('pm-board-wrap'), false);
+            show($('pm-gallery-wrap'), false);
+            show($('pm-built-wrap'), true);
+
+            if (it.kind === 'wf') {
+                logo.style.background = '#dcfce7'; logo.style.color = '#16a34a'; logo.innerHTML = '⚙';
+                show($('pm-board-wrap'), true);
+                $('pm-counts').textContent = `${it.wf.nodeCount} nodes · ${(it.wf.edges || []).length} connections`;
+                renderN8nBoard($('pm-board'), it.wf, { mini: false });
+                $('pm-problem').textContent = it.short;
+                $('pm-built').innerHTML = `<li>Built and maintained as a production n8n workflow at Enki.AI.</li><li>Automates repetitive steps end to end with reliable, monitored execution.</li><li>Integrates the connected tools shown on the board (APIs, Sheets, Gmail, HubSpot, etc.).</li>`;
+                $('pm-stack-label').textContent = 'Built with';
+                $('pm-stack').innerHTML = ['n8n', 'REST APIs', 'Webhooks', 'JSON', 'JavaScript'].map(s => `<span class="tag tag-blue">${s}</span>`).join('');
+            } else if (it.kind === 'ext') {
+                logo.style.background = '#ede9fe'; logo.style.color = '#7c3aed'; logo.innerHTML = '🧩';
+                $('pm-problem').textContent = it.ext.desc;
+                $('pm-built').innerHTML = `<li>Chrome extension (Manifest V3) supporting the outbound automation and lead workflow.</li><li>Runs in-browser to capture and pass data into the n8n pipelines.</li>`;
+                $('pm-stack-label').textContent = 'Permissions';
+                const perms = (it.ext.permissions || []);
+                $('pm-stack').innerHTML = (perms.length ? perms : ['activeTab', 'storage']).map(s => `<span class="tag">${s}</span>`).join('');
+            } else {
+                const p = it.soft;
+                logo.style.background = 'var(--blue-soft)'; logo.style.color = ''; logo.innerHTML = `<img src="${px(p.logo)}" alt="" style="max-height:100%;max-width:100%;object-fit:contain">`;
+                $('pm-problem').textContent = p.problem;
+                $('pm-built').innerHTML = p.built.map(b => `<li>${b}</li>`).join('');
+                $('pm-stack-label').textContent = 'Tech stack';
+                $('pm-stack').innerHTML = p.stack.map(s => `<span class="tag tag-blue">${s}</span>`).join('');
+                if (p.gallery) { show($('pm-gallery-wrap'), true); setGallery(p, 'mobile'); modal.dataset.pid = p.id; }
+            }
+
+            modal.classList.add('show'); modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden'; $('pm-close').focus();
+        }
+        window.openItem = openItem;
+
+        function setGallery(p, type) {
+            $('pm-gallery').innerHTML = p.gallery[type].map(src => `<img src="${px(src)}" alt="${p.title} ${type} screen" loading="lazy">`).join('');
+            document.querySelectorAll('.gbtn').forEach(b => b.classList.toggle('active', b.dataset.g === type));
+        }
+        $('pm-gallery-wrap').addEventListener('click', e => {
+            const b = e.target.closest('.gbtn'); if (!b) return;
+            const p = SOFT.find(x => x.id === modal.dataset.pid); if (p) setGallery(p, b.dataset.g);
+        });
+
+        function closeModal() {
+            modal.classList.remove('show'); modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = ''; $('pm-board').innerHTML = '';
+        }
+        $('pm-close').addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+        render();
+    </script>
+    <script src="../assets/site.js"></script>
+</body>
+
+</html>

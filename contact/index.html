@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Jim Christian Ayco</title>
+    <meta name="description" content="Get in touch with Jim Christian Ayco.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/tw.js"></script>
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
+
+<body data-page="contact" data-prefix="../">
+    <main>
+        <!-- HERO -->
+        <section class="section wrap" style="padding-top:3.25rem;padding-bottom:1rem">
+            <div class="max-w-3xl reveal in">
+                <span class="eyebrow">Get in Touch</span>
+                <h1 class="h-title mt-3">Let's work together</h1>
+                <p class="lead mt-5">Have a project in mind, want to collaborate, or just want to say hi? Feel free to
+                    reach out — I'll get back to you as soon as possible.</p>
+            </div>
+        </section>
+
+        <section class="section wrap grid lg:grid-cols-2 gap-6" style="padding-top:1.5rem;padding-bottom:4rem">
+            <!-- CONTACT INFO -->
+            <div class="card p-7 reveal">
+                <h2 style="font-weight:800;color:var(--navy-strong);font-size:1.25rem;margin-bottom:1.5rem">Contact
+                    Information</h2>
+                <ul class="space-y-5">
+                    <li class="flex gap-3.5 items-start">
+                        <span class="ci">✉</span>
+                        <div>
+                            <p class="ci-l">Email</p>
+                            <a href="mailto:jimchritianayco@gmail.com" class="ci-v"
+                                style="color:var(--blue)">jimchritianayco@gmail.com</a>
+                        </div>
+                    </li>
+                    <li class="flex gap-3.5 items-start">
+                        <span class="ci">📍</span>
+                        <div>
+                            <p class="ci-l">Location</p>
+                            <p class="ci-v">Bacolod City, Negros Occidental, Philippines</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-3.5 items-start">
+                        <span class="ci">📞</span>
+                        <div>
+                            <p class="ci-l">Phone</p>
+                            <a href="tel:+639945483984" class="ci-v">+63 994 548 3984</a>
+                        </div>
+                    </li>
+                    <li class="flex gap-3.5 items-start">
+                        <span class="ci">🟢</span>
+                        <div>
+                            <p class="ci-l">Availability</p>
+                            <p class="ci-v">Open for opportunities and collaborations</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-3.5 items-start">
+                        <span class="ci">in</span>
+                        <div>
+                            <p class="ci-l">LinkedIn</p>
+                            <a href="https://www.linkedin.com/in/jim-christian-ayco-a28b52297/" target="_blank"
+                                rel="noopener" class="ci-v" style="color:var(--blue)">jim-christian-ayco</a>
+                        </div>
+                    </li>
+                    <li class="flex gap-3.5 items-start">
+                        <span class="ci">GH</span>
+                        <div>
+                            <p class="ci-l">GitHub</p>
+                            <a href="https://github.com/jimayco" target="_blank" rel="noopener" class="ci-v"
+                                style="color:var(--blue)">github.com/jimayco</a>
+                        </div>
+                    </li>
+                </ul>
+                <!-- Location card (no fake map) -->
+                <div class="mt-6 p-5 dotgrid" style="border-radius:14px;background:var(--blue-soft)">
+                    <p style="font-weight:700;color:var(--navy-strong);display:flex;gap:.5rem;align-items:center">📍
+                        Based in Bacolod City</p>
+                    <p style="color:var(--muted);font-size:.88rem;margin-top:.3rem">Negros Occidental, Philippines ·
+                        Available for remote work</p>
+                </div>
+            </div>
+
+            <!-- CONTACT FORM -->
+            <div class="card p-7 reveal">
+                <h2 style="font-weight:800;color:var(--navy-strong);font-size:1.25rem;margin-bottom:1.5rem">Send Me a
+                    Message</h2>
+                <form id="cform" novalidate>
+                    <div class="grid sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="fl" for="f-name">Your Name</label>
+                            <input class="field" id="f-name" name="name" type="text" placeholder="John Doe"
+                                autocomplete="name">
+                            <p class="err" id="e-name"></p>
+                        </div>
+                        <div>
+                            <label class="fl" for="f-email">Your Email</label>
+                            <input class="field" id="f-email" name="email" type="email" placeholder="john@example.com"
+                                autocomplete="email">
+                            <p class="err" id="e-email"></p>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <label class="fl" for="f-subject">Subject</label>
+                        <input class="field" id="f-subject" name="subject" type="text" placeholder="Project inquiry">
+                        <p class="err" id="e-subject"></p>
+                    </div>
+                    <div class="mt-3">
+                        <label class="fl" for="f-message">Your Message</label>
+                        <textarea class="field" id="f-message" name="message" rows="5"
+                            placeholder="Tell me a little about your project..." style="resize:vertical"></textarea>
+                        <p class="err" id="e-message"></p>
+                    </div>
+                    <button type="submit" id="sendBtn" class="btn btn-primary mt-4"
+                        style="width:100%;justify-content:center">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.2">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                        Send Message
+                    </button>
+                    <p id="form-status" class="form-note mt-3" style="display:none"></p>
+                    <p class="form-note mt-3" style="color:var(--muted-soft);display:flex;gap:.4rem;align-items:center">
+                        🔒 Your message opens in your email app — nothing is stored or shared.</p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <style>
+        .ci { width: 42px; height: 42px; flex: none; border-radius: 11px; background: var(--blue-soft); color: var(--blue-dark); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .9rem; }
+        .ci-l { color: var(--muted-soft); font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 .15rem; }
+        .ci-v { color: var(--navy-strong); font-weight: 600; font-size: .95rem; }
+        .fl { display: block; color: var(--muted); font-size: .78rem; font-weight: 700; margin-bottom: .35rem; }
+        .err { color: #ef4444; font-size: .78rem; margin: .3rem 0 0; min-height: 0; }
+    </style>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        /* ============================================================
+           EmailJS config — paste your 3 keys from https://dashboard.emailjs.com
+           (Account → API keys, and Email Services / Email Templates)
+           Template must contain variables: {{from_name}} {{from_email}} {{subject}} {{message}}
+           ============================================================ */
+        const EMAILJS_PUBLIC_KEY = 'RiYHwXixH3riVP-1z';
+        const EMAILJS_SERVICE_ID = 'service_vfdhb4c';
+        const EMAILJS_TEMPLATE_ID = 'template_liwzb3n';
+        const CONTACT_EMAIL = 'jimchritianayco@gmail.com';
+
+        const configured = ![EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID]
+            .some(v => !v || v.indexOf('YOUR_') === 0);
+        if (configured && window.emailjs) emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+        const form = document.getElementById('cform');
+        const sendBtn = document.getElementById('sendBtn');
+        const sendBtnHTML = sendBtn.innerHTML;
+        const status = document.getElementById('form-status');
+
+        function setErr(id, msg) {
+            document.getElementById('e-' + id).textContent = msg || '';
+            document.getElementById('f-' + id).classList.toggle('invalid', !!msg);
+        }
+        function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+        function showStatus(msg, color) { status.style.display = 'block'; status.style.color = color; status.textContent = msg; }
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('f-name').value.trim();
+            const email = document.getElementById('f-email').value.trim();
+            const subject = document.getElementById('f-subject').value.trim();
+            const message = document.getElementById('f-message').value.trim();
+
+            let ok = true;
+            setErr('name', name ? '' : 'Please enter your name.'); if (!name) ok = false;
+            setErr('email', email ? (isEmail(email) ? '' : 'Please enter a valid email.') : 'Please enter your email.'); if (!email || !isEmail(email)) ok = false;
+            setErr('subject', subject ? '' : 'Please add a subject.'); if (!subject) ok = false;
+            setErr('message', message ? '' : 'Please write a message.'); if (!message) ok = false;
+            if (!ok) { showStatus('Please fix the highlighted fields.', '#ef4444'); return; }
+
+            // Fallback to mailto until EmailJS keys are filled in
+            if (!configured || !window.emailjs) {
+                const body = encodeURIComponent(message + '\n\n— ' + name + '\n' + email);
+                window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${body}`;
+                showStatus('Opening your email app… (add EmailJS keys to send automatically).', '#f59e0b');
+                return;
+            }
+
+            sendBtn.disabled = true;
+            sendBtn.innerHTML = 'Sending…';
+            showStatus('Sending your message…', 'var(--muted)');
+
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                from_name: name, from_email: email, subject: subject, message: message, to_email: CONTACT_EMAIL
+            }).then(function () {
+                showStatus('✓ Message sent — thanks! I\'ll get back to you soon.', '#16a34a');
+                form.reset();
+            }).catch(function (err) {
+                console.error('EmailJS error:', err);
+                showStatus('Could not send right now. Please email ' + CONTACT_EMAIL + ' directly.', '#ef4444');
+            }).finally(function () {
+                sendBtn.disabled = false;
+                sendBtn.innerHTML = sendBtnHTML;
+            });
+        });
+    </script>
+    <script src="../assets/site.js"></script>
+</body>
+
+</html>
