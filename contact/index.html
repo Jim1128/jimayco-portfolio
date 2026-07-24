@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../assets/tw.js?v=8"></script>
-    <link rel="stylesheet" href="../assets/styles.css?v=8">
+    <script src="../assets/tw.js?v=9"></script>
+    <link rel="stylesheet" href="../assets/styles.css?v=9">
 </head>
 
 <body data-page="contact" data-prefix="../">
@@ -23,7 +23,7 @@
                 <span class="eyebrow">Get in Touch</span>
                 <h1 class="h-title mt-3">Let's work together</h1>
                 <p class="lead mt-5">Have a project in mind, want to collaborate, or just want to say hi? Feel free to
-                    reach out — I'll get back to you as soon as possible.</p>
+                    reach out and I'll get back to you as soon as possible.</p>
             </div>
         </section>
 
@@ -129,7 +129,7 @@
                     </button>
                     <p id="form-status" class="form-note mt-3" style="display:none"></p>
                     <p class="form-note mt-3" style="color:var(--muted-soft);display:flex;gap:.4rem;align-items:center">
-                        🔒 Your message is sent securely to my inbox — I'll reply by email.</p>
+                        🔒 Your message goes straight to my inbox and I'll reply by email.</p>
                 </form>
             </div>
         </section>
@@ -150,7 +150,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
         /* ============================================================
-           EmailJS config — paste your 3 keys from https://dashboard.emailjs.com
+           EmailJS config. Paste your 3 keys from https://dashboard.emailjs.com
            (Account → API keys, and Email Services / Email Templates)
            Template must contain variables: {{from_name}} {{from_email}} {{subject}} {{message}}
            ============================================================ */
@@ -191,7 +191,7 @@
 
             // Fallback to mailto until EmailJS keys are filled in
             if (!configured || !window.emailjs) {
-                const body = encodeURIComponent(message + '\n\n— ' + name + '\n' + email);
+                const body = encodeURIComponent(message + '\n\nFrom: ' + name + '\n' + email);
                 window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${body}`;
                 showStatus('Opening your email app… (add EmailJS keys to send automatically).', '#f59e0b');
                 return;
@@ -204,7 +204,7 @@
             emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
                 from_name: name, from_email: email, subject: subject, message: message, to_email: CONTACT_EMAIL
             }).then(function () {
-                showStatus('✓ Message sent — thanks! I\'ll get back to you soon.', '#16a34a');
+                showStatus('✓ Message sent, thanks! I\'ll get back to you soon.', '#16a34a');
                 form.reset();
             }).catch(function (err) {
                 console.error('EmailJS error:', err);
@@ -215,7 +215,7 @@
             });
         });
     </script>
-    <script src="../assets/site.js?v=8"></script>
+    <script src="../assets/site.js?v=9"></script>
 </body>
 
 </html>

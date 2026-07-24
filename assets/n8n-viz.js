@@ -1,5 +1,5 @@
 /* ===========================================================
-   n8n workflow board renderer — data-driven from real JSON exports.
+   n8n workflow board renderer data-driven from real JSON exports.
    Recreates the n8n editor look: dark dotted canvas, node cards with
    colored icons + labels, curved connections, animated data packets.
    Full boards support scroll-to-zoom and drag-to-pan.
@@ -101,7 +101,7 @@
 
         // ---------- FULL (zoom + pan) ----------
         container.innerHTML =
-            `<div class="n8n-canvas" tabindex="0" aria-label="${esc(wf.title)} workflow board — scroll to zoom, drag to pan">
+            `<div class="n8n-canvas" tabindex="0" aria-label="${esc(wf.title)} workflow board scroll to zoom, drag to pan">
                <div class="n8n-viewport">
                  <svg width="${b.vbW}" height="${b.vbH}" viewBox="${b.vbX} ${b.vbY} ${b.vbW} ${b.vbH}" style="display:block">
                    <defs>${inner.dots}</defs>

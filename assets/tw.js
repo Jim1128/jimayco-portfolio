@@ -7,7 +7,7 @@
     } catch (e) { }
 })();
 
-/* Shared Tailwind CDN config — white & blue design system */
+/* Shared Tailwind CDN config white & blue design system */
 tailwind.config = {
     theme: {
         extend: {

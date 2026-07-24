@@ -1,4 +1,4 @@
-/* Real projects — sourced from resume + existing project files. No fabricated metrics. */
+/* Real projects, sourced from resume + existing project files. No fabricated metrics. */
 window.PORTFOLIO_PROJECTS = [
     {
         id: 'enki',
