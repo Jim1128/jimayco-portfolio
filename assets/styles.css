@@ -99,11 +99,11 @@ img { max-width: 100%; }
 a { text-decoration: none; }
 
 /* ---------- Layout helpers ---------- */
-.wrap { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-inline: 1.25rem; }
 
-.section { padding: 4rem 0; }
+.section { padding-block: 4rem; }
 
-@media (max-width: 640px) { .section { padding: 2.75rem 0; } }
+@media (max-width: 640px) { .section { padding-block: 2.75rem; } }
 
 /* ---------- Cards ---------- */
 .card {
@@ -286,6 +286,48 @@ a { text-decoration: none; }
 .n8n-zoom-btns { position: absolute; top: 8px; right: 8px; display: flex; flex-direction: column; gap: 4px; }
 .n8n-zoom-btns button { width: 28px; height: 28px; border-radius: 7px; border: 1px solid #333; background: #22232b; color: #cbd5e1; cursor: pointer; font-size: 1rem; line-height: 1; }
 .n8n-zoom-btns button:hover { background: #2d2e38; }
+
+/* ===========================================================
+   Mobile polish — tighter, fitted, comfortable on phones/tablets
+   =========================================================== */
+@media (max-width: 900px) {
+    .nav-inner { height: 62px; }
+    .nav-logo { font-size: .98rem; gap: .5rem; }
+    .nav-logo .mark { width: 34px; height: 34px; border-radius: 9px; }
+}
+
+@media (max-width: 640px) {
+    .wrap { padding-inline: 1.75rem; }
+    .section { padding-block: 2.25rem; }
+    .h-title { font-size: clamp(1.85rem, 8.5vw, 2.4rem); line-height: 1.08; }
+    .lead { font-size: .96rem; line-height: 1.65; }
+    .eyebrow { font-size: .68rem; }
+
+    /* Uniform, comfortable card padding on phones */
+    .card { padding: 1.3rem !important; }
+    .pm-panel { padding: 0 !important; }
+
+    /* Grids with big gaps tighten */
+    .grid { gap: 1rem !important; }
+
+    /* Full-width primary/ghost buttons read better on phones */
+    main .btn-primary, main .btn-ghost { width: 100%; justify-content: center; }
+    .nav-cv-desktop { width: auto; }
+
+    /* Shrink very long logo name */
+    .nav-logo span:last-child { font-size: .92rem; }
+
+    /* Tags: allow horizontal scroll rows instead of tall wraps where helpful */
+    .tag { font-size: .74rem; padding: .28rem .6rem; }
+
+    /* Contact info icons + gallery images fit */
+    #pm-gallery img, .pm-gallery img { height: 170px; }
+}
+
+@media (max-width: 380px) {
+    .nav-logo span:last-child { display: none; }
+    .h-title { font-size: 1.7rem; }
+}
 
 @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
