@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../assets/tw.js?v=11"></script>
-    <link rel="stylesheet" href="../assets/styles.css?v=11">
+    <script src="../assets/tw.js?v=12"></script>
+    <link rel="stylesheet" href="../assets/styles.css?v=12">
 </head>
 
 <body data-page="projects" data-prefix="../">
@@ -86,7 +86,7 @@
                     <p id="pm-problem" class="pm-text"></p>
                 </div>
                 <div id="pm-built-wrap" class="mt-5">
-                    <p class="pm-label">What it does</p>
+                    <p class="pm-label" id="pm-built-label">What it does</p>
                     <ul id="pm-built" class="pm-text space-y-1.5" style="list-style:disc;padding-left:1.2rem"></ul>
                 </div>
                 <div class="mt-5">
@@ -124,9 +124,9 @@
         .gbtn.active { background: var(--blue-soft); color: var(--blue-dark); border-color: #bfdbfe; }
     </style>
 
-    <script src="../assets/projects-data.js?v=11"></script>
-    <script src="../assets/workflows-data.js?v=11"></script>
-    <script src="../assets/n8n-viz.js?v=11"></script>
+    <script src="../assets/projects-data.js?v=12"></script>
+    <script src="../assets/workflows-data.js?v=12"></script>
+    <script src="../assets/n8n-viz.js?v=12"></script>
     <script>
         const px = s => '../' + s;
         const WF = window.N8N_WORKFLOWS || [];
@@ -206,13 +206,20 @@
                 show($('pm-board-wrap'), true);
                 $('pm-counts').textContent = `${it.wf.nodeCount} nodes · ${(it.wf.edges || []).length} connections`;
                 renderN8nBoard($('pm-board'), it.wf, { mini: false });
-                $('pm-problem').textContent = it.short;
-                $('pm-built').innerHTML = `<li>Built and maintained as a production n8n workflow at Enki.AI.</li><li>Automates repetitive steps end to end with reliable, monitored execution.</li><li>Integrates the connected tools shown on the board (APIs, Sheets, Gmail, HubSpot, etc.).</li>`;
-                $('pm-stack-label').textContent = 'Built with';
-                $('pm-stack').innerHTML = ['n8n', 'REST APIs', 'Webhooks', 'JSON', 'JavaScript'].map(s => `<span class="tag tag-blue">${s}</span>`).join('');
+                $('pm-problem').textContent = it.wf.desc;
+                // Real steps from this workflow's actual nodes (execution order), capped
+                const steps = (it.wf.steps || []);
+                const shown = steps.slice(0, 10);
+                let li = shown.map(s => `<li>${s}</li>`).join('');
+                if (steps.length > shown.length) li += `<li style="list-style:none;color:var(--muted-soft)">+ ${steps.length - shown.length} more steps</li>`;
+                $('pm-built-label').textContent = 'Key steps (from the actual nodes)';
+                $('pm-built').innerHTML = li;
+                $('pm-stack-label').textContent = 'Tools used in this workflow';
+                $('pm-stack').innerHTML = (it.wf.tools || []).map(s => `<span class="tag tag-blue">${s}</span>`).join('');
             } else if (it.kind === 'ext') {
                 logo.style.background = '#ede9fe'; logo.style.color = '#7c3aed'; logo.innerHTML = '🧩';
                 $('pm-problem').textContent = it.ext.desc;
+                $('pm-built-label').textContent = 'What it does';
                 $('pm-built').innerHTML = `<li>Chrome extension (Manifest V3) supporting the outbound automation and lead workflow.</li><li>Runs in-browser to capture and pass data into the n8n pipelines.</li>`;
                 $('pm-stack-label').textContent = 'Permissions';
                 const perms = (it.ext.permissions || []);
@@ -221,6 +228,7 @@
                 const p = it.soft;
                 logo.style.background = 'var(--blue-soft)'; logo.style.color = ''; logo.innerHTML = `<img src="${px(p.logo)}" alt="" style="max-height:100%;max-width:100%;object-fit:contain">`;
                 $('pm-problem').textContent = p.problem;
+                $('pm-built-label').textContent = 'What it does';
                 $('pm-built').innerHTML = p.built.map(b => `<li>${b}</li>`).join('');
                 $('pm-stack-label').textContent = 'Tech stack';
                 $('pm-stack').innerHTML = p.stack.map(s => `<span class="tag tag-blue">${s}</span>`).join('');
@@ -251,7 +259,7 @@
 
         render();
     </script>
-    <script src="../assets/site.js?v=11"></script>
+    <script src="../assets/site.js?v=12"></script>
 </body>
 
 </html>
