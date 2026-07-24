@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../assets/tw.js?v=6"></script>
-    <link rel="stylesheet" href="../assets/styles.css?v=6">
+    <script src="../assets/tw.js?v=7"></script>
+    <link rel="stylesheet" href="../assets/styles.css?v=7">
 </head>
 
 <body data-page="contact" data-prefix="../">
@@ -137,8 +137,11 @@
 
     <style>
         .ci { width: 42px; height: 42px; flex: none; border-radius: 11px; background: var(--blue-soft); color: var(--blue-dark); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .9rem; }
+        /* Let long email/links shrink & wrap instead of overflowing the card (kills the missing right gap) */
+        ul.space-y-5 > li { min-width: 0; }
+        ul.space-y-5 > li > div { min-width: 0; flex: 1; }
         .ci-l { color: var(--muted-soft); font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 .15rem; }
-        .ci-v { color: var(--navy-strong); font-weight: 600; font-size: .95rem; }
+        .ci-v { color: var(--navy-strong); font-weight: 600; font-size: .95rem; overflow-wrap: anywhere; word-break: break-word; display: inline-block; max-width: 100%; }
         .fl { display: block; color: var(--muted); font-size: .78rem; font-weight: 700; margin-bottom: .35rem; }
         .err { color: #ef4444; font-size: .78rem; margin: .3rem 0 0; min-height: 0; }
     </style>
@@ -212,7 +215,7 @@
             });
         });
     </script>
-    <script src="../assets/site.js?v=6"></script>
+    <script src="../assets/site.js?v=7"></script>
 </body>
 
 </html>
