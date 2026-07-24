@@ -324,9 +324,13 @@ a { text-decoration: none; }
     #pm-gallery img, .pm-gallery img { height: 170px; }
 }
 
-@media (max-width: 380px) {
-    .nav-logo span:last-child { display: none; }
-    .h-title { font-size: 1.7rem; }
+@media (max-width: 400px) {
+    /* keep the name visible; just tighten so it always fits */
+    .nav-logo span:last-child { font-size: .84rem; letter-spacing: -.01em; }
+    .nav-logo .mark { width: 30px; height: 30px; font-size: .78rem; }
+    .nav-inner { height: 58px; }
+    .theme-toggle { width: 34px; height: 34px; }
+    .h-title { font-size: 1.75rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
