@@ -72,9 +72,19 @@
                     <span class="node hero-node badge-float2" style="top:41%;left:0">API</span>
                     <span class="node hero-node badge-float3" style="top:72%;left:5%">🗄 Database</span>
 
-                    <!-- profile (background-removed cutout) -->
-                    <img class="hero-photo" src="Pictures/profile%20img/Jim%20Profile-cutout.png"
-                        alt="Jim Christian Ayco" width="300" height="400" loading="eager">
+                    <!-- profile: theme-aware three-layer stack (fallback + light + dark), crossfades on theme change -->
+                    <div class="hero-photo">
+                        <img class="hp-layer hp-fallback" src="Pictures/profile%20img/Jim%20Profile-cutout.png"
+                            alt="Jim Christian Ayco, Junior Software Developer" width="300" height="400"
+                            loading="eager" decoding="async">
+                        <!-- src loads only when the layer is marked data-ready, so no 404 for assets not added yet -->
+                        <img class="hp-layer hp-theme hp-light" data-ready
+                            data-src="Pictures/profile%20img/profile-light-sunglasses.webp" alt="" aria-hidden="true"
+                            width="300" height="400" loading="eager" decoding="async">
+                        <img class="hp-layer hp-theme hp-dark"
+                            data-src="Pictures/profile%20img/profile-dark-flashlight.webp" alt="" aria-hidden="true"
+                            width="300" height="400" loading="eager" decoding="async">
+                    </div>
 
                     <!-- dashboard panel -->
                     <div class="diagram hero-dash badge-float2">
@@ -250,11 +260,29 @@
         .hero-role { color: var(--blue); font-weight: 700; font-size: 1.4rem; margin: .4rem 0 1rem; }
         .hero-art { min-height: 420px; }
         .hero-lines { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+        /* Theme-aware profile stack: fallback sits in flow and sizes the box; theme layers crossfade over it */
         .hero-photo {
             position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
-            height: 420px; width: auto; object-fit: contain; z-index: 2;
-            filter: drop-shadow(0 18px 30px rgba(15, 23, 42, .18));
+            height: 420px; width: max-content; z-index: 2;
         }
+        .hp-layer {
+            height: 420px; width: auto; object-fit: contain; display: block;
+            filter: drop-shadow(0 18px 30px rgba(15, 23, 42, .18));
+            will-change: opacity;
+        }
+        /* fallback sizes the box; visible only while the active theme has no loaded image (or it errors) */
+        .hp-fallback { position: relative; z-index: 1; opacity: 1; transition: opacity 450ms ease-in-out; }
+        .hp-theme {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; transition: opacity 450ms ease-in-out; z-index: 2; pointer-events: none;
+        }
+        /* Only a successfully-loaded theme layer may reveal; missing/404 stays hidden so fallback shows through */
+        :root:not([data-theme="dark"]) .hp-light.loaded { opacity: 1; }
+        :root[data-theme="dark"] .hp-dark.loaded { opacity: 1; }
+        /* Once the current theme's image is loaded, fully hide the fallback so no second body ghosts behind it */
+        :root:not([data-theme="dark"]) .hero-photo:has(.hp-light.loaded) .hp-fallback { opacity: 0; }
+        :root[data-theme="dark"] .hero-photo:has(.hp-dark.loaded) .hp-fallback { opacity: 0; }
+        @media (prefers-reduced-motion: reduce) { .hp-theme { transition: none; } }
         .hero-node { position: absolute; z-index: 3; }
         .plus { position: absolute; color: #cbd5e1; font-weight: 700; font-size: 1.4rem; z-index: 1; }
         .hero-dash { position: absolute; top: 6%; right: -2%; width: 175px; padding: .7rem .8rem; z-index: 3; }
@@ -275,19 +303,37 @@
             .hero-lines, .plus, .hero-node, .hero-dash { display: none; }
             .hero-photo {
                 position: static; transform: none; height: auto;
-                max-height: 320px; max-width: 60%; margin: 0 auto; display: block;
+                max-width: 60%; margin: 0 auto; display: block;
             }
+            .hp-layer { height: auto; max-height: 320px; max-width: 100%; }
             .hero-role { font-size: 1.15rem; margin-top: .2rem; }
             .hero-focus { gap: .2rem .6rem; }
             .hero-focus .sep { display: none; }
         }
         @media (max-width: 640px) {
-            .hero-photo { max-width: 55%; max-height: 280px; }
+            .hero-photo { max-width: 55%; }
+            .hp-layer { max-height: 280px; }
             .hero-role { font-size: 1.1rem; margin-top: .2rem; }
             .hero-focus { gap: .2rem .6rem; }
             .hero-focus .sep { display: none; }
         }
     </style>
+    <script>
+        // Theme profile layers (sunglasses = light, flashlight = dark). A layer loads ONLY when it carries
+        // the `data-ready` attribute — add it once that layer's genuinely-transparent WebP exists in
+        // Pictures/profile img/. Layers without it make no request (no 404) and the transparent cutout
+        // fallback shows for that theme. A ready layer crossfades in on load; on error the fallback stays.
+        // No layout shift — all layers share one fixed box.
+        (function () {
+            document.querySelectorAll('.hp-theme[data-ready]').forEach(function (img) {
+                function ok() { if (img.naturalWidth > 0) img.classList.add('loaded'); }
+                img.addEventListener('load', ok);
+                img.addEventListener('error', function () { img.classList.remove('loaded'); });
+                img.src = img.getAttribute('data-src'); // triggers the load only now
+                if (img.complete) ok();
+            });
+        })();
+    </script>
     <script src="assets/site.js?v=13"></script>
 </body>
 
