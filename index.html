@@ -301,18 +301,20 @@
             /* Fluid, centered profile on top; no absolute overlaps on tablet/mobile */
             .hero-art { min-height: 0; display: flex; align-items: center; justify-content: center; padding: 0; order: -1; margin-bottom: .5rem; }
             .hero-lines, .plus, .hero-node, .hero-dash { display: none; }
+            /* relative (not static) so absolute theme layers stay anchored to this box, not .hero-art */
             .hero-photo {
-                position: static; transform: none; height: auto;
+                position: relative; transform: none; height: auto;
                 max-width: 60%; margin: 0 auto; display: block;
             }
-            .hp-layer { height: auto; max-height: 320px; max-width: 100%; }
+            .hp-fallback { height: auto; max-height: 320px; max-width: 100%; }
+            .hp-theme { height: 100%; max-height: none; }
             .hero-role { font-size: 1.15rem; margin-top: .2rem; }
             .hero-focus { gap: .2rem .6rem; }
             .hero-focus .sep { display: none; }
         }
         @media (max-width: 640px) {
             .hero-photo { max-width: 55%; }
-            .hp-layer { max-height: 280px; }
+            .hp-fallback { max-height: 280px; }
             .hero-role { font-size: 1.1rem; margin-top: .2rem; }
             .hero-focus { gap: .2rem .6rem; }
             .hero-focus .sep { display: none; }
